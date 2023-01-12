@@ -24,7 +24,7 @@ public class InstructorDetail {
 	//for bi_direction adding mapped by with annotation//
 	//generate getter and setter for Instructor field//
 	//here mappedBy "instructorDetail refers to the field in Instructor class//
-	@OneToOne(mappedBy = "instructorDetail",cascade=CascadeType.ALL)
+	@OneToOne(mappedBy = "instructorDetail",cascade= {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
 	private Instructor instructor;
 	
 	public Instructor getInstructor() {

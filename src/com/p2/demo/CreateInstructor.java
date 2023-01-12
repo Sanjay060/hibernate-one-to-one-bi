@@ -16,8 +16,8 @@ public class CreateInstructor {
 		try
 		{
 			EntityTransaction entityTransaction=entityManager.getTransaction();
-			Instructor i1=new Instructor("sanjay" ,"c","c338068@gmail.com");
-			InstructorDetail i2=new InstructorDetail("java","film");
+			Instructor i1=new Instructor("kruthik" ,"bs","kruthik@gmail.com");
+			InstructorDetail i2=new InstructorDetail("fullsatck","sleeping");
 			i1.setInstructorDetail(i2);
 			entityTransaction.begin();
 			entityManager.persist(i1);

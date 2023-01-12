@@ -6,33 +6,31 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import com.p2.demo.entity.InstructorDetail;
-//deleting the parallel entity when one of the table entity is deleted parallel to parent/child table entity deleted// 
-public class DeleteInstructor {
+//To delete only instructor_detail first we want to break the bi-directional link b/w the to entity and then remove//
+//change the cascade-type all to other cascade type except remove in instructor-detail.class//
+public class DeleteInstructorDetail {
 
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory=Persistence.createEntityManagerFactory("hibernate-example1");
 		EntityManager entityManager=entityManagerFactory.createEntityManager();
-		try
-		{
+		try {
 			EntityTransaction entityTransaction=entityManager.getTransaction();
-			entityTransaction.begin();
-			int id=2;
+			int id=3;
 			InstructorDetail i=entityManager.find(InstructorDetail.class, id);
-			System.out.println("InstructorDetail: "+i);
-			System.out.println("Instructor: "+i.getInstructor());
-			//deleting the instructor_detail entity it also delete the instructor entity this is cascade delete//
+			entityTransaction.begin();
+			System.out.println("removing the instructor detail id: "+i);
+			i.getInstructor().setInstructorDetail(null);
 			entityManager.remove(i);
+			System.out.println("removed...");
 			entityTransaction.commit();
-			System.out.println(i);
 			
 		}
-		catch(Exception e)
-		{
+		catch (Exception e) {
 			System.out.println(e);
 		}
 		finally
 		{
-			entityManagerFactory.close();
+			entityManager.close();
 		}
 
 	}
